@@ -1,3 +1,4 @@
+import { login } from './dto/login.dto';
 import { crearUser, updateUser } from './dto/users.dto';
 import { UsersService } from './users.service';
 import { Body, ConflictException, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
@@ -26,12 +27,21 @@ export class UsersController {
         return users
     }
 
+    @Post("login")
+    async login(@Body() body: login){
+        try {
+            return this.UsersService.login(body)
+        } catch (error) {
+            return error
+        }
+    }
+
     @Post()
     async createUser(@Body() body: crearUser){
         try {
             return await this.UsersService.createUser(body)
         } catch (error) {
-            if(error.code === 11000) throw new ConflictException("Usuario ya existe")
+            if(error.code === 11000) throw new ConflictException("Usuario ya existe con ese correo")
             return error
         }
     }

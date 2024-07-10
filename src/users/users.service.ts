@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Users } from './schema/users.schema';
 import { Model } from 'mongoose';
 import { crearUser, updateUser } from './dto/users.dto';
+import { login } from './dto/login.dto';
 
 @Injectable()
 export class UsersService {
@@ -33,5 +34,19 @@ export class UsersService {
 
     async deleteUserById(id: string){
         return await this.UserModel.findByIdAndDelete(id)
+    }
+
+    async login(body: login){
+        const user = await this.UserModel.findOne({email: body.email})
+        if(!user) return {success: false, message: "Usuario no existe, favor de registrarse"}
+        if(user.password !== body.password) return {success: false, message: "Contraseña es incorrecta"}
+        return {
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+            }, 
+            success: true
+        }
     }
 }
