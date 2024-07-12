@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Users } from './schema/users.schema';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { crearUser, updateUser } from './dto/users.dto';
 import { login } from './dto/login.dto';
 
@@ -48,5 +48,21 @@ export class UsersService {
             }, 
             success: true
         }
+    }
+
+    async addMovieToFavorites(idUser: string, idMovie: string){
+        return this.UserModel.findByIdAndUpdate(
+            idUser, 
+            {$addToSet: {favorites: idMovie}},
+            {new:true}
+        )
+    }
+
+    async deleteMovieFavorites(idUser: string, idMovie: string){
+        return this.UserModel.findByIdAndUpdate(
+            idUser,
+            {$pull: {favorites: idMovie}},
+            {new: true}
+        )
     }
 }

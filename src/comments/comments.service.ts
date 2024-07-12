@@ -140,4 +140,12 @@ export class CommentsService {
             $match: match
         }])
     }
+
+    async createComment(comment: Comments){
+        try {
+            return await this.CommentsModel.create(comment)
+        } catch (error) {
+            return error
+        }
+    }
 }
