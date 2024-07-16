@@ -1,0 +1,159 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Users {
+  _id: String
+  name: String
+  email: String
+  password: String
+  favorites: [String!]
+  movies: [String!]
+}
+
+type Awards {
+  """"""
+  wins: Float
+
+  """"""
+  nominations: Float
+
+  """"""
+  text: String
+}
+
+type Imdb {
+  """"""
+  rating: Float
+
+  """"""
+  votes: Float
+
+  """"""
+  id: Float
+}
+
+type DateClass {
+  """"""
+  numberLong: String
+}
+
+type Released {
+  """"""
+  date: DateClass
+}
+
+type Viewer {
+  """"""
+  rating: Float
+
+  """"""
+  numReviews: Float
+
+  """"""
+  meter: Float
+}
+
+type LastUpdated {
+  """"""
+  date: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Tomatoes {
+  """"""
+  viewer: Viewer
+
+  """"""
+  lastUpdated: LastUpdated
+}
+
+type Movies {
+  """Descripcion de la peliucla"""
+  plot: String
+
+  """Generos de la pelicula"""
+  genres: [String!]
+
+  """Tiempo"""
+  runtime: Float
+
+  """Casting"""
+  cast: [String!]
+
+  """Comentarios"""
+  num_mflix_comments: Float
+
+  """Titulo"""
+  title: String
+
+  """Poster url"""
+  poster: String
+
+  """Descripcion completa"""
+  fullplot: String
+
+  """Idiomas"""
+  languages: [String!]
+
+  """Relaised"""
+  released: Released
+
+  """Directores"""
+  directors: [String!]
+
+  """Raiting"""
+  rated: String
+
+  """Awards"""
+  awards: Awards
+
+  """Fecha de publicacion"""
+  lastupdated: DateTime
+
+  """Año"""
+  year: String
+
+  """imdb"""
+  imdb: Imdb
+
+  """Paises"""
+  countries: [String!]
+
+  """Typo"""
+  type: String
+
+  """Tomates"""
+  tomatoes: Tomatoes
+}
+
+type MoviesGenresPagination {
+  """"""
+  movies: [Movies!]
+
+  """"""
+  total: Float
+}
+
+type Query {
+  getAllUsers: [Users!]!
+  getUserById(id: String!): Users!
+  getUserByLikeName(name: String!): [Users!]!
+  getMoviesByYear(year: Float!): [Movies!]!
+  getMoviesByGenresPagination(data: Genres!): MoviesGenresPagination!
+}
+
+input Genres {
+  """"""
+  genres: [String!]
+
+  """"""
+  skip: Float
+
+  """"""
+  limit: Float
+}

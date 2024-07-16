@@ -3,6 +3,7 @@ import { MoviesService } from './movies.service';
 import { MoviesController } from './movies.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Movies, MoviesSchema } from './schema/movies.schema';
+import { MoviesResolver } from './movies.resolver';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { Movies, MoviesSchema } from './schema/movies.schema';
       { name: Movies.name, schema: MoviesSchema }
     ])
   ],
-  providers: [MoviesService],
+  providers: [MoviesService, MoviesResolver],
   controllers: [MoviesController]
 })
 export class MoviesModule {}
