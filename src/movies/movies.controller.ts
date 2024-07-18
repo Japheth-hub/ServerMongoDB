@@ -55,4 +55,11 @@ export class MoviesController {
     ){
         return await this.MoviesService.getMoviesShowInfo(skip, limit)
     }
+
+    @Post("getByAnyProps")
+    async getByAnyProps(
+        @Body() body: any
+    ){
+        return await this.MoviesService.getByAnyProps(body.text, body.page, body.limit)
+    }
 }

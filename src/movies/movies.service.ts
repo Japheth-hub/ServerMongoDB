@@ -80,7 +80,20 @@ export class MoviesService {
                 year: movie.year
             }
         })
-        
+    }
+
+    async getByAnyProps(text: string, page: number, limit: number){
+        const search = await this.MoviesModel.find(
+            {$or: [
+                {plot: {$regex: text, $options: "i"}},
+                {title: {$regex: text, $options: "i"}},
+                {type: {$regex: text, $options: "i"}}
+            ]}
+        )
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .exec()
+        return search
     }
 
 }
