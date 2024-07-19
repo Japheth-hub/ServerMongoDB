@@ -4,6 +4,7 @@ import { Movies } from './schema/movies.schema';
 import { Moviesdto } from './dto/movies.dto';
 import { Model } from 'mongoose';
 import { Genres, Languages, Time } from './dto/movies.dto';
+import { Booleanos } from './dto/probandoBoleanos.dto';
 
 @Injectable()
 export class MoviesService {
@@ -94,6 +95,16 @@ export class MoviesService {
         .limit(limit)
         .exec()
         return search
+    }
+
+    async probandoBoleanos(boleanos: Booleanos){
+        console.log(boleanos)
+        if(boleanos.access){
+            console.log(true)
+        } else {
+            console.log(false)
+        }
+        return boleanos
     }
 
 }

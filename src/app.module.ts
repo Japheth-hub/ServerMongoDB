@@ -6,9 +6,13 @@ import { CommentsModule } from './comments/comments.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: "./uploads"
+    }),
     MongooseModule.forRoot("mongodb+srv://japhethra369:aYDn1aDpfxPVFQ30@curso.7xfpafw.mongodb.net/sample_mflix"), 
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

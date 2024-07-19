@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query, UseInterceptors } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Genres, Languages, Moviesdto, Time } from './dto/movies.dto';
+import { Booleanos } from './dto/probandoBoleanos.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('movies')
 export class MoviesController {
@@ -61,5 +63,12 @@ export class MoviesController {
         @Body() body: any
     ){
         return await this.MoviesService.getByAnyProps(body.text, body.page, body.limit)
+    }
+
+    @Post("probandoBoleanos")
+    @UseInterceptors(FileInterceptor('file'))
+    async probandoBoleanos(@Body() boleanos: Booleanos){
+        console.log(boleanos)
+        return await this.MoviesService.probandoBoleanos(boleanos)
     }
 }
