@@ -2,15 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Users {
-  _id: String
-  name: String
-  email: String
-  password: String
-  favorites: [String!]
-  movies: [String!]
-}
-
 type Awards {
   """"""
   wins: Float
@@ -129,6 +120,15 @@ type Movies {
 
   """Tomates"""
   tomatoes: Tomatoes
+}
+
+type Users {
+  _id: String
+  name: String
+  email: String
+  password: String
+  favorites: [String!]
+  movies: [String!]
 }
 
 type MoviesGenresPagination {

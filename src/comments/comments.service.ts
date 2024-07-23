@@ -1,9 +1,10 @@
 import { UsersService } from './../users/users.service';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Comments } from './schema/comments.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { fechaComments } from './dto/comments.dto';
+import { MoviesService } from 'src/movies/movies.service';
 
 @Injectable()
 export class CommentsService {
@@ -11,7 +12,9 @@ export class CommentsService {
     constructor(
         @InjectModel(Comments.name)
         private CommentsModel: Model<Comments>,
-        private readonly UsersService: UsersService
+        @Inject(forwardRef(() => UsersService))
+        private readonly UsersService: UsersService,
+        private readonly MoviesService: MoviesService
     ) { }
 
     async getCommentsByName(name: string) {

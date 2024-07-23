@@ -1,17 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Movies } from './schema/movies.schema';
 import { Moviesdto } from './dto/movies.dto';
 import { Model } from 'mongoose';
 import { Genres, Languages, Time } from './dto/movies.dto';
 import { Booleanos } from './dto/probandoBoleanos.dto';
+import { UsersService } from 'src/users/users.service';
+import { CommentsService } from 'src/comments/comments.service';
 
 @Injectable()
 export class MoviesService {
 
     constructor(
         @InjectModel(Movies.name)
-        private MoviesModel: Model<Movies>
+        private MoviesModel: Model<Movies>,
+        // @Inject(forwardRef(() => UsersService))
+        // private readonly usersService: UsersService,
+        @Inject(forwardRef(() => CommentsService))
+        private readonly CommentsService: CommentsService
     ){}
 
     async getMoviesByYear(year:number){

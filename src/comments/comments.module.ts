@@ -1,19 +1,21 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CommentsController } from './comments.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Comments, CommentsSchema } from './schema/comments.schema';
-import { UsersService } from 'src/users/users.service';
-import { Users, UsersSchema } from 'src/users/schema/users.schema';
+import { UsersModule } from 'src/users/users.module';
+import { MoviesModule } from 'src/movies/movies.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: Comments.name, schema: CommentsSchema },
-      { name: Users.name, schema: UsersSchema}
-    ])
+    ]),
+    forwardRef(() => UsersModule),
+    forwardRef(() => MoviesModule)
   ],
-  providers: [CommentsService, UsersService],
-  controllers: [CommentsController]
+  providers: [CommentsService],
+  controllers: [CommentsController],
+  exports: [CommentsService]
 })
 export class CommentsModule {}

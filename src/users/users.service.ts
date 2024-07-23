@@ -1,16 +1,21 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Users } from './schema/users.schema';
 import mongoose, { Model } from 'mongoose';
 import { crearUser, updateUser } from './dto/users.dto';
 import { login } from './dto/login.dto';
+import { CommentsService } from 'src/comments/comments.service';
+import { MoviesService } from 'src/movies/movies.service';
 
 @Injectable()
 export class UsersService {
 
     constructor(
         @InjectModel(Users.name)
-        private UserModel: Model<Users>
+        private UserModel: Model<Users>,
+        private readonly CommenstService: CommentsService,
+        private readonly MoviesService: MoviesService
+
     ){}
 
     async getAllUsers(){
