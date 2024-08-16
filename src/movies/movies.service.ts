@@ -14,8 +14,8 @@ export class MoviesService {
     constructor(
         @InjectModel(Movies.name)
         private MoviesModel: Model<Movies>,
-        // @Inject(forwardRef(() => UsersService))
-        // private readonly usersService: UsersService,
+        @Inject(forwardRef(() => UsersService))
+        private readonly usersService: UsersService,
         @Inject(forwardRef(() => CommentsService))
         private readonly CommentsService: CommentsService
     ){}

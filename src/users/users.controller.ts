@@ -17,6 +17,7 @@ export class UsersController {
     @Post()
     async createUser(@Body() body: crearUser){
         try {
+            console.log("🚀 ~ UsersController ~ createUser ~ body:", body)
             return await this.UsersService.createUser(body)
         } catch (error) {
             if(error.code === 11000) throw new ConflictException("Usuario ya existe con ese correo")

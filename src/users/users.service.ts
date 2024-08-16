@@ -34,7 +34,13 @@ export class UsersService {
     }
 
     async createUser(user: crearUser){
-        return await this.UserModel.create(user)
+        try {
+            return await this.UserModel.create(user)
+        } catch (error) {
+            console.log("🚀 ~ UsersService ~ createUser ~ error:", error)
+            return error
+            
+        }
     }
 
     async deleteUserById(id: string){

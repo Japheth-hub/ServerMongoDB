@@ -4,8 +4,6 @@ import {Schema as MongooseSchema} from "mongoose";
 @Schema()
 export class Users{
     @Prop()
-    _id?: MongooseSchema.Types.ObjectId
-    @Prop()
     name: string
     @Prop()
     email: string

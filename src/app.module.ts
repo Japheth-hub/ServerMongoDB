@@ -7,6 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { MulterModule } from '@nestjs/platform-express';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { MulterModule } from '@nestjs/platform-express';
     }),
     UsersModule, 
     MoviesModule, 
-    CommentsModule
+    CommentsModule, 
+    SocketModule
   ],
   controllers: [],
   providers: [],

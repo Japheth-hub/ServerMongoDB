@@ -12,7 +12,7 @@ import { UsersModule } from 'src/users/users.module';
     MongooseModule.forFeature([
       { name: Movies.name, schema: MoviesSchema }
     ]),
-    // forwardRef(() => UsersModule),
+    forwardRef(() => UsersModule),
     forwardRef(() => CommentsModule)
   ],
   providers: [MoviesService, MoviesResolver],
